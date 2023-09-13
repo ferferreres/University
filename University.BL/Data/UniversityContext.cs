@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using University.BL.Models;
 
 namespace University.BL.Data
 {
     public class UniversityContext : DbContext
     {
+        private static UniversityContext universityContext = null;
+
         public UniversityContext() 
             : base("UniversityContext"){}
 
@@ -19,7 +17,11 @@ namespace University.BL.Data
 
         public static UniversityContext Create()
         {
-            return new UniversityContext();
+            if (universityContext == null)
+                universityContext = new UniversityContext();
+            
+            return universityContext;
         }
+
     }
 }
