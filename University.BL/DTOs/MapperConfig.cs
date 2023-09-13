@@ -12,6 +12,12 @@ namespace University.BL.DTOs
             {
                 cfg.CreateMap<Course, CourseDTO>(); // GET
                 cfg.CreateMap<CourseDTO, Course>(); // POST-PUT
+
+                cfg.CreateMap<Student, StudentDTO>();
+                cfg.CreateMap<StudentDTO, Student>();
+
+                cfg.CreateMap<Enrollment, EnrollmentDTO>();
+                cfg.CreateMap<EnrollmentDTO, Enrollment>();
             });
         }
     }
