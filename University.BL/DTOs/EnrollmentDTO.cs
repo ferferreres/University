@@ -1,6 +1,4 @@
-﻿using University.BL.Models;
-
-namespace University.BL.DTOs
+﻿namespace University.BL.DTOs
 {
     public enum Grade
     {

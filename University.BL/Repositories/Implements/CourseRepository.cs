@@ -7,6 +7,7 @@ namespace University.BL.Repositories.Implements
     {
         public CourseRepository(UniversityContext universityContext) : base(universityContext)
         {
+
         }
     }
 }

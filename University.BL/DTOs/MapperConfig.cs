@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using University.BL.Models;
-using University.BL.DTOs;
 
 namespace University.BL.DTOs
 {

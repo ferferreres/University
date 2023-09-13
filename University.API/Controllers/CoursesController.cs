@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using University.BL.Data;
 using University.BL.DTOs;
+using University.BL.Models;
 using University.BL.Repositories.Implements;
 using University.BL.Services.Implements;
 
@@ -39,6 +41,21 @@ namespace University.API.Controllers
             var courseDTO = mapper.Map<CourseDTO>(course);
 
             return Ok(courseDTO);
+        }
+
+        [HttpPost]
+        public async Task<IHttpActionResult> Post(CourseDTO courseDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); //400
+
+            try
+            {
+                var course = mapper.Map<Course>(courseDTO);
+                course = await courseService.Insert(course);
+                return Ok(course);
+            }
+            catch (Exception ex) { return InternalServerError(ex); }
         }
     }
 }
