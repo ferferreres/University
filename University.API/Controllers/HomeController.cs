@@ -14,5 +14,11 @@ namespace University.API.Controllers
 
             return View();
         }
+
+        public ActionResult Consultar()
+        {
+            return View();
+        }
     }
+
 }

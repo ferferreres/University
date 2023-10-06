@@ -1,0 +1,36 @@
+﻿<div ng-controller="coursesController">
+    <table class="table">
+        <tr>
+            <th>
+                CourseID
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Credits
+            </th>
+        </tr>
+
+        <tr ng-repeat="course in courses">
+            <td>
+                {{course.CourseID}}
+            </td>
+            <td>
+                {{course.Title}}
+            </td>
+            <td>
+                {{course.Credits}}
+            </td>
+            <td>
+                <a href="#" ng-click="removeCourse(course.CourseID)" style="color:red">Limpiar</a>
+            </td>
+        </tr>
+    </table>
+    <form ng-submit="addCourse()">
+        <input type="number" ng-model="newCourse.CourseID" placeholder="Course ID"/>
+        <input type="text" ng-model="newCourse.Title" placeholder="Title"/>
+        <input type="number" ng-model="newCourse.Credits" placeholder="Credits"/>
+        <input type="submit" value="Guardar curso"/>
+    </form>
+</div>

@@ -1,0 +1,31 @@
+﻿<div>
+    <table class="table">
+        <tr>
+            <th>
+                FullName
+            </th>
+            <th>
+                Enrollment Date
+            </th>
+        </tr>
+
+        <tr ng-repeat="student in students">
+            <td>
+                {{student.FullName}}
+            </td>
+            <td>
+                {{student.EnrollmentDate | date: 'short'}}
+            </td>
+            <td>
+                <a href="#" ng-click="removeStudent(student.ID)" style="color:red">Limpiar</a>
+            </td>
+        </tr>
+    </table>
+    <form ng-submit="addStudent()">
+        <input type="text" ng-model="newStudent.LastName" placeholder="Student Last Name" />
+        <input type="text" ng-model="newStudent.FirstMidName" placeholder="First Mid Name" />
+        <input type="datetime-local" ng-model="newStudent.EnrollmentDate"/>
+        <input type="submit" value="Añadir Alumno" />
+    </form>
+</div>
+
