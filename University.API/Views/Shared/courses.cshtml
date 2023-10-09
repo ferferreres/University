@@ -1,14 +1,11 @@
 ﻿<div ng-controller="coursesController">
-    <table class="table">
+    <table class="table table-bordered">
         <tr>
             <th>
                 CourseID
             </th>
             <th>
                 Title
-            </th>
-            <th>
-                Credits
             </th>
         </tr>
 
@@ -17,16 +14,36 @@
                 {{course.CourseID}}
             </td>
             <td>
-                {{course.Title}}
-            </td>
-            <td>
-                {{course.Credits}}
+                <a href="#" ng-click="infoCourse(course.CourseID)" style="color:blue">{{course.Title}}</a>
             </td>
             <td>
                 <a href="#" ng-click="removeCourse(course.CourseID)" style="color:red">Limpiar</a>
             </td>
         </tr>
     </table>
+    <div ng-show="courseInfo">
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Enrollment ID
+                </th>
+                <th>
+                    Student ID
+                </th>
+                <th>
+                    Student Full Name
+                </th>
+            </tr>
+            <tr ng-repeat="c in courseInfo">
+                <td>
+                    {{c.EnrollmentID}}
+                </td>
+                <td>
+                    {{c.StudentID}}
+                </td>
+            </tr>
+        </table>
+    </div>
     <form ng-submit="addCourse()">
         <input type="number" ng-model="newCourse.CourseID" placeholder="Course ID"/>
         <input type="text" ng-model="newCourse.Title" placeholder="Title"/>

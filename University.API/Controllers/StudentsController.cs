@@ -51,6 +51,15 @@ namespace University.API.Controllers
             return Ok(studentDTO);
         }
 
+        [HttpGet]
+        [ResponseType(typeof(IEnumerable<StudentDTO>))]
+        public async Task<IHttpActionResult> GetStudentsByIds(List<int> Ids)
+        {
+            var students = await studentService.GetAll();
+            IEnumerable<Student> result = students.Where(student => Ids.Contains(student.ID)).ToList();
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IHttpActionResult> Post(StudentDTO studentDTO)
         {

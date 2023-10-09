@@ -18,7 +18,7 @@ angular.module('moduleService', [])
 
         var deleteCourse = function (idCourse) {
             return $http.delete(courseService.key + '/' + idCourse);
-        }
+        };
 
         return {
             getCourses: getCourses,
@@ -33,8 +33,12 @@ angular.module('moduleService', [])
 
         studentService.key = '/api/Students';
 
-        var getStudent = function () {
+        var getStudents = function () {
             return $http.get(studentService.key);
+        };
+
+        var getByIdStudent = function (studentId) {
+            return $http.get(studentService.key + '/' + studentId);
         };
 
         var postStudent = function (newStudent) {
@@ -43,11 +47,26 @@ angular.module('moduleService', [])
 
         var deleteStudent = function (idStudent) {
             return $http.delete(studentService.key + '/' + idStudent);
-        }
+        };
 
         return {
-            getStudent: getStudent,
+            getStudents: getStudents,
+            getByIdStudent: getByIdStudent,
             postStudent: postStudent,
             deleteStudent: deleteStudent
         };
+    }])
+
+    .factory('EnrollmentService', ['$http', function ($http) {
+        var enrollmentService = {};
+
+        enrollmentService.key = '/api/Enrollments';
+
+        var getCourseInfoById = function (courseId) {
+            return $http.get(enrollmentService.key + '/' + courseId + '/Students');
+        };
+
+        return {
+            getCourseInfoById: getCourseInfoById
+        }
     }]);

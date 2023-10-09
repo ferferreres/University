@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -46,6 +47,7 @@ namespace University.API.Controllers
         /// <response code="200">OK. Devuelve el objeto solicitado.</response>
         /// <response code="404">NotFound. No se ha entontrado el objeto solicitado.</response>
         [HttpGet]
+        [Route("{id}")]
         [ResponseType(typeof(CourseDTO))]
         public async Task<IHttpActionResult> GetById(int id)
         {

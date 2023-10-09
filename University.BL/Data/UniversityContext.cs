@@ -23,5 +23,6 @@ namespace University.BL.Data
             return universityContext;
         }
 
+        public System.Data.Entity.DbSet<University.BL.DTOs.StudentDTO> StudentDTOes { get; set; }
     }
 }

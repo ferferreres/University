@@ -1,7 +1,7 @@
 ﻿'use strict';
 
 var courseCtrl = angular.module("moduleController", [])
-    .controller("coursesController", ['$scope', 'CoursesService', function ($scope, CoursesService) {
+    .controller("coursesController", ['$scope', 'CoursesService','EnrollmentService', function ($scope, CoursesService, EnrollmentService) {
 
     var handleSuccess = function (response) {
         $scope.courses = response.data;
@@ -24,6 +24,11 @@ var courseCtrl = angular.module("moduleController", [])
                 CoursesService.getCourses().then(handleSuccess);
             })
         };
+        $scope.infoCourse = function (courseId) {
+            EnrollmentService.getCourseInfoById(courseId).then(function (response) {
+                $scope.courseInfo = response.data;
+            })
+        };
     }])
     .controller("studentsController", ['$scope', 'StudentsService', function ($scope, StudentService) {
 
@@ -31,13 +36,19 @@ var courseCtrl = angular.module("moduleController", [])
             $scope.students = response.data;
         }
 
-        StudentService.getStudent().then(handleSuccess);
+        StudentService.getStudents().then(handleSuccess);
         $scope.newStudent = {};
+
+        $scope.showStudentById = function (studentID) {
+            StudentService.getByIdStudent(studentID).then(function (response) {
+                $scope.studentInfo = response.data;
+            });
+        }
 
         $scope.addStudent = function () {
             StudentService.postStudent($scope.newStudent)
                 .then(function () {
-                    StudentService.getStudent().then(handleSuccess);
+                    StudentService.getStudents().then(handleSuccess);
                 })
             $scope.newStudent = {};
         };
@@ -45,7 +56,8 @@ var courseCtrl = angular.module("moduleController", [])
         $scope.removeStudent = function (student) {
             StudentService.deleteStudent(student)
                 .then(function () {
-                    StudentService.getStudent().then(handleSuccess);
+                    StudentService.getStudents().then(handleSuccess);
                 })
         };
+
     }]);

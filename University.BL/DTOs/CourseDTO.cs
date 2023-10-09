@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace University.BL.DTOs
 {
@@ -13,5 +14,7 @@ namespace University.BL.DTOs
 
         [Required(ErrorMessage = "The field Credits is required")]
         public int Credits { get; set; }
+
+        public List<StudentDTO> Students { get; set; }
     }
 }

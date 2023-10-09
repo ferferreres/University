@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace University.BL.DTOs
@@ -22,5 +23,7 @@ namespace University.BL.DTOs
         {
             get { return string.Format("{0} {1}", LastName, FirstMidName);  }
         }
+
+        public List<CourseDTO> Courses { get; set; }
     }
 }
