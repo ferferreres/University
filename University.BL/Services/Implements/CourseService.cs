@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using University.BL.Models;
 using University.BL.Repositories;
 
@@ -15,6 +16,11 @@ namespace University.BL.Services.Implements
         public async Task<bool> DeleteCheckOnEntity(int id)
         {
             return await courseRepository.DeleteCheckOnEntity(id);
+        }
+
+        public async Task<IEnumerable<Student>> GetStudentsByCourseId(int courseId)
+        {
+            return await courseRepository.GetStudentsByCourseId(courseId);
         }
     }
 }

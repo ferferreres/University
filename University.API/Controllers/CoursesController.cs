@@ -10,12 +10,13 @@ using University.BL.Data;
 using University.BL.DTOs;
 using University.BL.Models;
 using University.BL.Repositories.Implements;
+using University.BL.Services;
 using University.BL.Services.Implements;
 
 namespace University.API.Controllers
 {
     //[Authorize]
-    [RoutePrefix("api/Courses")]
+    [RoutePrefix("api/courses")]
     public class CoursesController : ApiController
     {
         private IMapper mapper;
@@ -59,6 +60,21 @@ namespace University.API.Controllers
             var courseDTO = mapper.Map<CourseDTO>(course);
 
             return Ok(courseDTO);
+        }
+
+        [HttpGet]
+        [Route("{id}/students")]
+        [ResponseType(typeof(IEnumerable<StudentDTO>))]
+        public async Task<IHttpActionResult> GetStudentsByCourseId(int id)
+        {
+            var flag = await courseService.GetById(id);
+            if (flag == null)
+                return NotFound();
+
+            var students = await courseService.GetStudentsByCourseId(id);
+            var studentsDTO = students.Select(s => mapper.Map<StudentDTO>(s));
+
+            return Ok(studentsDTO);
         }
 
         [HttpPost]

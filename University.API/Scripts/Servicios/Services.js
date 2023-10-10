@@ -6,12 +6,15 @@ angular.module('moduleService', [])
 
         var courseService = {};
 
-        courseService.key = '/api/Courses';
+        courseService.key = '/api/courses';
 
         var getCourses = function () {
             return $http.get(courseService.key);
         };
 
+        var getInfo = function (idCourse) {
+            return $http.get(courseService.key + '/' + idCourse + '/students');
+        };
         var postCourse = function (newCourse) {
             return $http.post(courseService.key, newCourse);
         };
@@ -22,6 +25,7 @@ angular.module('moduleService', [])
 
         return {
             getCourses: getCourses,
+            getInfo: getInfo,
             postCourse: postCourse,
             deleteCourse: deleteCourse
         };
@@ -31,7 +35,7 @@ angular.module('moduleService', [])
 
         var studentService = {};
 
-        studentService.key = '/api/Students';
+        studentService.key = '/api/students';
 
         var getStudents = function () {
             return $http.get(studentService.key);
@@ -39,6 +43,10 @@ angular.module('moduleService', [])
 
         var getByIdStudent = function (studentId) {
             return $http.get(studentService.key + '/' + studentId);
+        };
+
+        var getInfoStudent = function (studentId) {
+            return $http.get(studentService.key + '/' + studentId + '/courses');
         };
 
         var postStudent = function (newStudent) {
@@ -52,6 +60,7 @@ angular.module('moduleService', [])
         return {
             getStudents: getStudents,
             getByIdStudent: getByIdStudent,
+            getInfoStudent: getInfoStudent,
             postStudent: postStudent,
             deleteStudent: deleteStudent
         };

@@ -1,25 +1,29 @@
 ﻿'use strict';
 
 var courseCtrl = angular.module("moduleController", [])
-    .controller("coursesController", ['$scope', 'CoursesService','EnrollmentService', function ($scope, CoursesService, EnrollmentService) {
+    .controller("coursesController", ['$scope', 'CoursesService', function ($scope, CoursesService) {
 
-    var handleSuccess = function (response) {
-        $scope.courses = response.data;
-    }
+        var handleSuccess = function (response) {
+            $scope.courses = response.data;
+        };
 
-    CoursesService.getCourses().then(handleSuccess);
-    $scope.newCourse = {};
-
-    $scope.addCourse = function () {
+        CoursesService.getCourses().then(handleSuccess);
+        $scope.newCourse = {};
+        $scope.getInfo = function (id) {
+            CourseService.getInfo(id).then(function(response) {
+                $scope.StudentsInfo = response.data;
+            })
+        };
+        $scope.addCourse = function () {
         CoursesService.postCourse($scope.newCourse)
             .then(function () {
                 CoursesService.getCourses().then(handleSuccess);
             })
         $scope.newCourse = {};
-    };
+        };
 
-    $scope.removeCourse = function (course) {
-        CoursesService.deleteCourse(course)
+        $scope.removeCourse = function (course) {
+            CoursesService.deleteCourse(course)
             .then(function () {
                 CoursesService.getCourses().then(handleSuccess);
             })
@@ -36,13 +40,17 @@ var courseCtrl = angular.module("moduleController", [])
             $scope.students = response.data;
         }
 
+        $studentInfo = {};
         StudentService.getStudents().then(handleSuccess);
         $scope.newStudent = {};
 
         $scope.showStudentById = function (studentID) {
             StudentService.getByIdStudent(studentID).then(function (response) {
-                $scope.studentInfo = response.data;
+                $scope.studentInfo.student = response.data;
             });
+            StudentService.getInfoStudent(studentID).then(function (response) {
+                $scope.studentInfo.enrollments = response.data
+            }
         }
 
         $scope.addStudent = function () {

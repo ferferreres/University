@@ -13,7 +13,7 @@ using University.BL.Services.Implements;
 
 namespace University.API.Controllers
 {
-    [RoutePrefix("api/Students")]
+    [RoutePrefix("api/students")]
     public class StudentsController : ApiController
     {
         private IMapper mapper;
@@ -39,6 +39,7 @@ namespace University.API.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         [ResponseType(typeof(StudentDTO))]
         public async Task<IHttpActionResult> GetById(int id)
         {
@@ -52,12 +53,18 @@ namespace University.API.Controllers
         }
 
         [HttpGet]
-        [ResponseType(typeof(IEnumerable<StudentDTO>))]
-        public async Task<IHttpActionResult> GetStudentsByIds(List<int> Ids)
+        [Route("{id}/courses")]
+        [ResponseType(typeof(IEnumerable<CourseDTO>))]
+        public async Task<IHttpActionResult> GetCoursesByStudentId(int id)
         {
-            var students = await studentService.GetAll();
-            IEnumerable<Student> result = students.Where(student => Ids.Contains(student.ID)).ToList();
-            return Ok(result);
+            var flag = await studentService.GetById(id);
+            if (flag == null)
+                return NotFound();
+
+            var courses = await studentService.GetCoursesByStudentId(id);
+            var coursesDTO = courses.Select(s => mapper.Map<CourseDTO>(s));
+
+            return Ok(coursesDTO);
         }
 
         [HttpPost]
