@@ -38,8 +38,12 @@ var courseCtrl = angular.module("moduleController", [])
         $scope.studentInfo = {};
         StudentService.getStudents().then(handleSuccess);
         $scope.newStudent = {};
+        $scope.show = false;
+        $scope.removeError = false;
 
         $scope.showStudentById = function (studentID) {
+            $scope.show = true;
+            $scope.removeError = false;
             StudentService.getByIdStudent(studentID).then(function (response) {
                 $scope.studentInfo.student = response.data;
             });
@@ -59,7 +63,10 @@ var courseCtrl = angular.module("moduleController", [])
         $scope.removeStudent = function (student) {
             StudentService.deleteStudent(student)
                 .then(function () {
+                    $scope.show = false;
                     StudentService.getStudents().then(handleSuccess);
+                }, function () {
+                    $scope.removeError = true;
                 })
         };
 

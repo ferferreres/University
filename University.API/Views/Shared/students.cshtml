@@ -3,7 +3,6 @@
 
 
 <div>
-    
     <input type="text" class="form-control" ng-model="search" placeholder="Busca aqui..." />
     <br />
 
@@ -22,63 +21,67 @@
             </tr>
         </table>
     </div>
-    <div ng-show="studentInfo">
-        <table class="table table-bordered">
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    First Mid Name
-                </th>
-                <th>
-                    Last Name
-                </th>
-                <th>
-                    Enrollment Date
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    {{studentInfo.student.ID}}
-                </td>
-                <td>
-                    {{studentInfo.student.FirstMidName}}
-                </td>
-                <td>
-                    {{studentInfo.student.LastName}}
-                </td>
-                <td>
-                    {{studentInfo.student.EnrollmentDate | date : short}}
-                </td>
-            </tr>
-        </table>
-        <a href="#" ng-click="removeStudent(studentInfo.ID)" style="color:red">Borrar alumno de la base de datos.</a><br />
+    <div ng-show="show">
         <div ng-show="studentInfo">
             <table class="table table-bordered">
                 <tr>
                     <th>
-                        CourseID
+                        ID
                     </th>
                     <th>
-                        Title
+                        First Mid Name
                     </th>
                     <th>
-                        Credits
+                        Last Name
+                    </th>
+                    <th>
+                        Enrollment Date
                     </th>
                 </tr>
-                <tr ng-repeat="enroll in studentInfo.enrollments">
+                <tr>
                     <td>
-                        {{enroll.CourseID}}
+                        {{studentInfo.student.ID}}
                     </td>
                     <td>
-                        {{enroll.Title}}
+                        {{studentInfo.student.FirstMidName}}
                     </td>
                     <td>
-                        {{enroll.Credits}}
+                        {{studentInfo.student.LastName}}
+                    </td>
+                    <td>
+                        {{studentInfo.student.EnrollmentDate | date : short}}
                     </td>
                 </tr>
             </table>
+            <a href="#" ng-click="removeStudent(studentInfo.student.ID)" style="color:red">Borrar alumno de la base de datos.</a><br />
+            <div ng-show="removeError">No se puede borrar ese estudiante</div>
+            <div ng-show="studentInfo">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>
+                            CourseID
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Credits
+                        </th>
+                    </tr>
+                    <tr ng-repeat="enroll in studentInfo.enrollments">
+                        <td>
+                            {{enroll.CourseID}}
+                        </td>
+                        <td>
+                            {{enroll.Title}}
+                        </td>
+                        <td>
+                            {{enroll.Credits}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
     <form ng-submit="addStudent()">Formulario para añadir un alumno nuevo
         <input type="text" class="form-control" ng-model="newStudent.LastName" placeholder="Last Name"/>
