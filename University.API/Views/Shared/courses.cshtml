@@ -14,19 +14,16 @@
                 {{course.CourseID}}
             </td>
             <td>
-                <a href="#" ng-click="infoCourse(course.CourseID)" style="color:blue">{{course.Title}}</a>
+                <a href="#" ng-click="getInfo(course.CourseID)" style="color:blue">{{course.Title}}</a>
             </td>
             <td>
                 <a href="#" ng-click="removeCourse(course.CourseID)" style="color:red">Limpiar</a>
             </td>
         </tr>
     </table>
-    <div ng-show="courseInfo">
+    <div ng-show="studentsInfo">
         <table class="table table-bordered">
             <tr>
-                <th>
-                    Enrollment ID
-                </th>
                 <th>
                     Student ID
                 </th>
@@ -34,12 +31,12 @@
                     Student Full Name
                 </th>
             </tr>
-            <tr ng-repeat="c in courseInfo">
+            <tr ng-repeat="s in studentsInfo">
                 <td>
-                    {{c.EnrollmentID}}
+                    {{s.ID}}
                 </td>
                 <td>
-                    {{c.StudentID}}
+                    {{s.FullName}}
                 </td>
             </tr>
         </table>

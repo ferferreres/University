@@ -111,6 +111,7 @@ namespace University.API.Controllers
         }
 
         [HttpDelete]
+        [Route("{id}")]
         public async Task<IHttpActionResult> Delete(int id)
         {
             var flag = await studentService.GetById(id);

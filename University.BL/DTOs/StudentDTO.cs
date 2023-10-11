@@ -23,7 +23,5 @@ namespace University.BL.DTOs
         {
             get { return string.Format("{0} {1}", LastName, FirstMidName);  }
         }
-
-        public List<CourseDTO> Courses { get; set; }
     }
 }

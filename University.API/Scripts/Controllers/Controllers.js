@@ -10,8 +10,8 @@ var courseCtrl = angular.module("moduleController", [])
         CoursesService.getCourses().then(handleSuccess);
         $scope.newCourse = {};
         $scope.getInfo = function (id) {
-            CourseService.getInfo(id).then(function(response) {
-                $scope.StudentsInfo = response.data;
+            CoursesService.getInfo(id).then(function(response) {
+                $scope.studentsInfo = response.data;
             })
         };
         $scope.addCourse = function () {
@@ -28,11 +28,6 @@ var courseCtrl = angular.module("moduleController", [])
                 CoursesService.getCourses().then(handleSuccess);
             })
         };
-        $scope.infoCourse = function (courseId) {
-            EnrollmentService.getCourseInfoById(courseId).then(function (response) {
-                $scope.courseInfo = response.data;
-            })
-        };
     }])
     .controller("studentsController", ['$scope', 'StudentsService', function ($scope, StudentService) {
 
@@ -40,7 +35,7 @@ var courseCtrl = angular.module("moduleController", [])
             $scope.students = response.data;
         }
 
-        $studentInfo = {};
+        $scope.studentInfo = {};
         StudentService.getStudents().then(handleSuccess);
         $scope.newStudent = {};
 
@@ -49,9 +44,9 @@ var courseCtrl = angular.module("moduleController", [])
                 $scope.studentInfo.student = response.data;
             });
             StudentService.getInfoStudent(studentID).then(function (response) {
-                $scope.studentInfo.enrollments = response.data
-            }
-        }
+                $scope.studentInfo.enrollments = response.data;
+            })
+        };
 
         $scope.addStudent = function () {
             StudentService.postStudent($scope.newStudent)

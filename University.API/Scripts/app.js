@@ -1,16 +1,13 @@
 ﻿'use strict';
 
-var app = angular.module("universityApp", ['ngRoute', 'moduleController', 'moduleService'])
+var app = angular.module("universityApp", ["ngRoute", "moduleController", 'moduleService'])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider
-            .when('/', {
-                tempalteUrl:"/render/GetHtml?view=courses"
-            })
-            .when('/students', {
+            .when("/students", {
                 templateUrl: "/render/GetHtml?view=students",
                 controller: 'studentsController'
             })
-            .when('/courses', {
+            .when("/courses", {
                 templateUrl: "/render/GetHtml?view=courses",
                 controller: "coursesController"
             })
